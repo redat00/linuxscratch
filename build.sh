@@ -79,42 +79,12 @@ build_openssl () {
 	cd ..
 }
 
-fill_sbin_folder () {
-  while read p; do
-    find . -name "${p}" -type f -exec cp {} ../../../initrd/sbin/. \;
-  done <../../../openrc/openrc_sbin_files.txt
-}
-
-fill_lib_bin_folder () {
-  while read p; do
-    find . -name "${p}" -type f -exec cp {} ../../../initrd/lib/rc/bin/. \;
-  done <../../../openrc/openrc_lib_bin_files.txt
-}
-
-fill_lib_sbin_folder () {
-  while read p; do
-    find . -name "${p}" -type f -exec cp {} ../../../initrd/lib/rc/sbin/. \;
-  done <../../../openrc/openrc_lib_sbin_files.txt
-}
-
-fill_lib_sh_folder () {
-  while read p; do
-    find . -name "${p}" -type f -exec cp {} ../../../initrd/lib/rc/sh/. \;
-  done <../../../openrc/openrc_lib_sh_files.txt
-}
-
 build_openrc () {
 	wget -O openrc-${OPENRC_VERSION}.tar.gz https://github.com/OpenRC/openrc/archive/refs/tags/${OPENRC_VERSION}.tar.gz
 	tar -xzf openrc-${OPENRC_VERSION}.tar.gz
 	cd openrc-${OPENRC_VERSION}
 		meson setup buildir
 		meson compile -C buildir
-		cd buildir
-			fill_lib_sh_folder
-			fill_lib_sbin_folder
-			fill_lib_bin_folder
-			fill_sbin_folder
-		cd ..
 	cd ..
 }
 
