@@ -7,3 +7,14 @@ Small repository containing my script where I'm trying to build a small Linux OS
 This idea would be to get a really simple OS working, running with sysvinit, systemd, or openrc, depending on which one is the easiest to implement. Adding the openssh server is also a goal. 
 
 For those wondering, the root password is `test`.
+
+## Usage
+
+```bash
+make clean
+make build
+```
+
+```bash
+qemu-system-x86_64 -kernel bzImage -initrd initrd.img -nographic -append "console=ttyS0" -m size=512 --enable-kvm
+```
